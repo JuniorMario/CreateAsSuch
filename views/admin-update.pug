@@ -1,0 +1,11 @@
+head
+  title Post Panel
+p Update Post
+- var len = posts.length
+- for(let i = 0; i < len; i++)
+  div
+  p=posts[i]
+  a(href=`/admin/updatePost/${posts[i]}`) Edit
+  a(href=`/admin/deletePost/${posts[i]}`)  Delete
+  br
+

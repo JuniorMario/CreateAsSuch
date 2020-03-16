@@ -1,0 +1,7 @@
+*.config
+*/routes/users.js
+**/db/handler.js
+*.rdb
+**/docker
+**/node_modules
+**/bin

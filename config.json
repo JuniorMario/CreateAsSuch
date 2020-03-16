@@ -1,0 +1,16 @@
+{
+    "baseUrl": "localhost",
+    "cookie": {
+        "domain": "http://localhost",
+        "httpOnly": false,
+        "secure": false
+    },
+    "mailer": {
+        "user": "xxx",
+        "pass": "xxx",
+        "host": "xxx",
+        "from": "xxx <xxxxxxxxx>",
+        "secure": false,
+        "port": 587
+    }
+}

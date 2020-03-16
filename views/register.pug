@@ -1,0 +1,15 @@
+head
+  title Register
+  script(type='text/javascript' src='./javascripts/validate.js')
+p Register
+aaaa
+form(action='/users/register' method='POST')
+  label(for='fname') Username:
+  br
+  input#username(type='text' name='username')
+  br
+  label(for='lname') Password:
+  br
+  input#password(type='password' name='password')
+  input(type='submit' onclick='Register()' value='submit')
+p  #{message}

@@ -1,0 +1,10 @@
+head
+  title Post Panel
+p Delete Post
+
+form(action='/admin/deletePost'  method='POST')
+  label(for='title') Confirm the ID to delete:
+  br
+  input#id(value=id name="id")
+  input(type='submit'  value='DELETE' method='POST')
+p  #{message}

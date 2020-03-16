@@ -1,0 +1,20 @@
+head
+  title Post Panel
+p Update Post
+
+form(action='/admin/updatePost'  method='POST')
+  label(for='title') Title:
+  br
+  input#title(type='text' name='title')
+  br
+  label(for='subtitle') subtitle(optional):
+  br
+  input#subtitle(type='text' name='subtitle')
+  br
+  label(for='content') Content:
+  br
+  input#content(type='text' name='content')
+  br
+  input#id(value=id name="id")
+  input(type='submit'  value='submit' method='POST')
+p  #{message}

@@ -1,0 +1,15 @@
+head
+  title Login
+  script(type='text/javascript' src='./javascripts/validate.js')
+p Login
+
+form(action='/users/login' method='POST')
+  label(for='username') Username:
+  br
+  input#username(type='text' name='username')
+  br
+  label(for='password') Password:
+  br
+  input#password(type='password' name='password')
+  input(type='submit' onclick='Register()' value='submit')
+p  #{message}
