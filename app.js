@@ -1,7 +1,6 @@
 var createError = require('http-errors');
 var config = require('./config.json')
 var express = require('express');
-// const sessionLoader = require('./session')
 const authService = require('./services/auth.service')
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -36,11 +35,6 @@ app.use(session({
   store: new redisStore({ host: 'localhost', port: 6360, client: client, ttl: 260 }),
   resave: true,
   saveUninitialized: true,
-  token: (req) => {
-    console.log("MIDDLEWARE")
-    console.log(req.session)
-    return req.session// use UUIDs for session IDs
-  },
   cookie: {
     path: '/',
     expires: true,
