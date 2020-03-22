@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Joi = require('joi')
 var path = require('path')
-var DBhandler = require('../db/handler')
 var adminController = require('../controllers/admin.controller')
 var authController = require('../controllers/auth.controller')
 var userService = require('../services/user.service')
@@ -11,7 +10,6 @@ var validatorService = require('../services/validator.service')
 var validators = require('../validators')
 var Joi = require('joi')
 
-var dbhand = new DBhandler()
 /* GET home page. */
 
 
@@ -21,6 +19,12 @@ router.get('/home', async function (req, res) {
   const links = await authServices.isLogged(req)
   res.render('index.pug', { content: posts.response, links: links });
 
+});
+
+
+router.get('/logout', async function (req, res) {
+  req.session.destroy()
+  res.redirect('/home')
 });
 
 router.get('/post/:id', async function (req, res) {
@@ -41,12 +45,13 @@ router.post('/users/login', async function (req, res) {
     res.render("login.pug", { message: validate.message })
   } else {
     token = authServices.getToken(validate.user)
-    req.header.token = token
+    req.session.token = token
+    req.session.save()
     admin = await authServices.validateAdmin(req, res)
     if (admin) {
       res.redirect('/admin')
     }
-    //  res.redirect('/home')
+  
 
   }
 
