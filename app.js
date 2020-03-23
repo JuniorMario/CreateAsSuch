@@ -1,21 +1,23 @@
 var createError = require('http-errors');
 var config = require('./config.json')
-var express = require('express');
+const express = require('express');
+//const sessionLoader = require('./session')
 const authService = require('./services/auth.service')
-var path = require('path');
-var cookieParser = require('cookie-parser');
+const path = require('path');
+const cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const uuid = require('uuid/v4')
-var session = require('express-session')
+const session = require('express-session')
 const redis = require('redis');
-const redisStore = require('connect-redis')(session);
-
+const livereload  = require("connect-livereload");
 var db = require("./db/model")
 const client = redis.createClient();
+const redisStore = require('connect-redis')(session);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -30,22 +32,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use(session({
-
-  secret: 'thisisamotherfuckingsecret!KK23L!#9@',
-  store: new redisStore({ host: 'localhost', port: 6360, client: client, ttl: 260 }),
-  resave: true,
+  secret: 'ThisIsHowYouUseRedisSessionStorage',
+  name: '_redisPractice',
+  resave: false,
   saveUninitialized: true,
-  cookie: {
-    path: '/',
-    expires: true,
-    maxAge: (30 * 60 * 1000),
-    domain: config.cookie.domain,
-    httpOnly: config.cookie.httpOnly,
-    secure: config.cookie.secure,
+  cookie: { secure: false }, // Note that the cookie-parser module is no longer needed
+  store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl: 86400 }),
+}));
 
-  },
 
-}))
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler

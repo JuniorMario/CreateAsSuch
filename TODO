@@ -1,4 +1,4 @@
-[Coding at School - STEP 1] [MOTHERFUCKING FINISHED]
+[Coding at School - STEP 1] (CAS) [MOTHERFUCKING FINISHED]
 -Refactor register[DONE]
 -Implement admin-page[DONE]
 -Implement post-register[DONE]
@@ -7,3 +7,6 @@
 -Implement posts at index[DONE]
 -Implement sessions[DONE]
 
+[Coding at School - STEP 2] (CAS)
+-Add HREF links to all pages[...]
+-Implement pagination at /home

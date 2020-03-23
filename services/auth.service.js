@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 const tokenSecret = "thisisamotherfuckingsecret"
 exports.validateUser = async (username, password) => {
     const users = await _userdb.read()
-    const user = users.filter(item => item.password === password && item.name === username)
+    const user = users.filter(item => item.password === password && item.username === username)
     if (!user.length > 0) {
         return { valid: false, message: "Não cadastrado!" }
     }
@@ -32,23 +32,28 @@ exports.parseToken = async (token) => {
 }
 
 exports.validateAdmin = async (req, res, next) => {
-    const validObj = await this.parseToken(req.header.token)
-    if (validObj.rows[0].dataValues.type === "user") {
-        res.redirect('/home')
-        
-    } else {
-        req.profile = validObj.rows[0].dataValues
-        return true
+    const validObj = await this.parseToken(req.session.token)
+    if (req.session.token) {
+        if (validObj.rows[0].dataValues.type === "user") {
+            res.redirect('/home')
+        } else {
+            return true
+        }
     }
 }
 
 
 exports.validateAdminSession = async (req, res, next) => {
-    const validObj = await this.parseToken(req.header.token)
-    if (!validObj.rows[0].dataValues.type === "admin") {
-        res.redirect('/home')   
-    } 
-    next()
+    const isLogged = await this.isLogged(req)
+    if (isLogged.logged) {
+        const validObj = await this.parseToken(req.session.token)
+        if (validObj.rows[0].dataValues.type === "admin") {
+            next()
+        }
+    } else {
+        res.redirect('/users/login')
+    }
+ 
 }
 exports.getProfile = async (token) => {
     if (token) {
@@ -60,18 +65,19 @@ exports.getProfile = async (token) => {
 
 exports.validateUserSession = async (req, res) => {
     if (req.profile === undefined) {
-        profile = await this.getProfile(req.header.token)
+        profile = await this.getProfile(req.session.token)
         req.profile = profile
         return req
     } else {
         return req
     }
- 
+
 }
 
 exports.isLogged = async (req, res) => {
-    if (req.profile.type) {
+    if (!req.session.token) {
         return {
+            logged: false,
             name2: "Register",
             registerlink: "/users/register",
             loglink: "/users/login",
@@ -79,6 +85,7 @@ exports.isLogged = async (req, res) => {
         }
     } else {
         return {
+            logged: true,
             name2: "Register",
             registerlink: "/users/register",
             loglink: "/logout",

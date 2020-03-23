@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken')
 
 const tokenSecret = "thisisamotherfuckingsecret"
 exports.registerUser = async (username, password) => {
-    console.log(username)
     const response = AuthHandler.create({username, password})
     return {response, message: "Success"}
 }

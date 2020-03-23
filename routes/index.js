@@ -51,8 +51,6 @@ router.post('/users/login', async function (req, res) {
     if (admin) {
       res.redirect('/admin')
     }
-  
-
   }
 
 })

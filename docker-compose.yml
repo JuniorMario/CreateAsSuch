@@ -1,8 +1,20 @@
-version: '3'
+version: "3"
 
 services:
-
-  mysql-development:
+  app:
+    container_name: app 
+    ports: 
+      - "3000:3000"        
+    image: node:10.15.2
+    build:
+      context: .
+    volumes:
+      - ./:/myapp
+      - /myapp/node_modules
+    depends_on: 
+      - database
+  database:
+    container_name: database
     image: mysql:8.0.17
     environment:
       MYSQL_ROOT_PASSWORD: helloworld
@@ -10,8 +22,7 @@ services:
     ports:
       - "9229:9229"
       - "3308:3306"
-  
   admin:    
     image: adminer    
-    ports:      
+    ports:     
       - "8080:8080"
