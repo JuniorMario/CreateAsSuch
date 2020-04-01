@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 class Posts extends Sequelize.Model{ }
 class Users extends Sequelize.Model{ }
 
-const sequelize  =  new Sequelize('mysql://root:helloworld@localhost:3308/testapp')
+const sequelize  =  new Sequelize('mysql://root@database:3306/blogapp')
 class Database {
     constructor() {
         this._driver = null
@@ -10,7 +10,7 @@ class Database {
         this.Isconnected = this.isConnected()
     }
     async connect() {
-        this._driver = new Sequelize('mysql://root:helloworld@localhost:3308/testapp')
+        this._driver = new Sequelize('mysql://root@database:3306/blogapp')
     }
 
     async isConnected() {
@@ -33,7 +33,7 @@ Users.init({
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    username: {
         type: Sequelize.STRING,
         required: true
     },
@@ -50,7 +50,7 @@ Users.init({
     {
         sequelize,
         modelName: 'users',
-        tableName: 'users'
+        tableName: 'TB_USERS'
     })
 
 Posts.init({
