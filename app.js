@@ -7,11 +7,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const uuid = require('uuid/v4')
-//const session = require('express-session')
+const session = require('express-session')
 //const redis = require('redis');
-const livereload  = require("connect-livereload");
+
 var db = require("./db/model")
-const client = redis.createClient();
+
 //const redisStore = require('connect-redis')(session);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
