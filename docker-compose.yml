@@ -2,24 +2,30 @@ version: "3"
 
 services:
   app:
-    container_name: app 
-    ports: 
-      - "3000:3000"        
+    container_name: app
+    ports:
+      - "3000:3000"
     build:
       context: .
-    depends_on: 
+    links:
+      - redis
+    environment:
+    - REDIS_URL=redis://cache
+    depends_on:
       - database
+      - redis
   database:
     container_name: database
     image: mysql:5.7
-    environment: 
+    environment:
       - MYSQL_USERNAME=root
       - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=
       - MYSQL_ROOT_HOST=%
       - MYSQL_DATABASE=blogapp
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
-  admin:    
-    image: adminer    
-    ports:     
-      - "8080:8080"
+  redis:
+    container_name: cache
+    image: redis
+    expose:
+      - 6379
