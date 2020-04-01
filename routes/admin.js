@@ -50,7 +50,7 @@ router.get('/', authServices.validateAdminSession, async function (req, res) {
   router.post('/updatePost/', async function (req, res) {
     const valid = validatorService.validateIt({ title: req.body.title, subtitle: req.body.subtitle, content: req.body.content }, validators.PostValidator)
     if (valid.isvalid) {
-      const result = await adminController.updatePost(req.body.id, { title: req.body.title, subtitle: req.body.title, content: req.body.content })
+      const result = await adminController.updatePost(req.body.id, { title: req.body.title, subtitle: req.body.subtitle, content: req.body.content })
       valid.message = result.message
     }
     res.render("update-pg.pug", { user: "Barionix", message: valid.message })
