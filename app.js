@@ -7,12 +7,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const uuid = require('uuid/v4')
-const session = require('express-session')
-const redis = require('redis');
+//const session = require('express-session')
+//const redis = require('redis');
 const livereload  = require("connect-livereload");
 var db = require("./db/model")
 const client = redis.createClient();
-const redisStore = require('connect-redis')(session);
+//const redisStore = require('connect-redis')(session);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -37,7 +37,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }, // Note that the cookie-parser module is no longer needed
-  store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl: 86400 }),
+//  store: new redisStore({ host: 'localhost', port: 6379, client: client, ttl: 86400 }),
 }));
 
 
