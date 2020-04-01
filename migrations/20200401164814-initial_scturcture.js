@@ -18,7 +18,7 @@ module.exports = {
         required: false
     },
     content: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         required: true
     },
       createdAt: {
@@ -40,7 +40,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    username: {
         type: Sequelize.STRING,
         required: true
     },

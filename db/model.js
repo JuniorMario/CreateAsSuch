@@ -33,7 +33,7 @@ Users.init({
         primaryKey: true,
         autoIncrement: true
     },
-    name: {
+    username: {
         type: Sequelize.STRING,
         required: true
     },
@@ -50,7 +50,7 @@ Users.init({
     {
         sequelize,
         modelName: 'users',
-        tableName: 'users'
+        tableName: 'TB_USERS'
     })
 
 Posts.init({
