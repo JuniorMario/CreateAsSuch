@@ -1,8 +1,6 @@
 var createError = require('http-errors');
 var config = require('./config.json')
 const express = require('express');
-//const sessionLoader = require('./session')
-const authService = require('./services/auth.service')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -13,6 +11,7 @@ var db = require("./db/model")
 const redisStore = require('connect-redis')(session);
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var adminRouter = require('./routes/admin');
 
 var app = express();
 
@@ -35,13 +34,14 @@ app.use(session({
   name: '_redisPractice',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }, // Note that the cookie-parser module is no longer needed
+  cookie: { secure: false }, 
   store: sessionStore,
 }));
 
 
 app.use('/', indexRouter);
-
+app.use('/users', usersRouter);
+app.use('/admin-panel', adminRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
