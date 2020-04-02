@@ -4,4 +4,4 @@
 *.rdb
 **/docker
 **/node_modules
-**/bin
+
