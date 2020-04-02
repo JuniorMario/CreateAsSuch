@@ -1,7 +1,7 @@
-FROM alpine/node
+FROM keymetrics/pm2:10-alpine
 
 
-WORKDIR /
+WORKDIR /app
 
 COPY package.json ./
 RUN npm install
@@ -10,4 +10,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000 9229 6379 3308 3306
-CMD [ "npm", "start" ]
+CMD pm2 start --no-daemon --watch ./bin/www
