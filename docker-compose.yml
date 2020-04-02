@@ -11,7 +11,7 @@ services:
       context: .
     links:
       - redis
-
+      - database
     environment:
     - REDIS_URL=redis://cache
     depends_on:
