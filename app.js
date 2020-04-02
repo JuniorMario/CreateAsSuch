@@ -13,6 +13,22 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 
+const { exec } = require('child_process');
+
+console.log('Running migrations... %s', path.join(__dirname, './'))
+
+exec('npx sequelize-cli db:migrate', {
+  env: process.env,
+  cwd: path.join(__dirname, './'),
+}, (err, stdout, stderr) => {
+  if (err) {
+    console.info('Migrations failed to run:')
+    console.error(err)
+  } else {
+    console.log('Migrations runned successfully')
+  }
+})
+
 var app = express();
 
 
@@ -34,7 +50,7 @@ app.use(session({
   name: '_redisPractice',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false }, 
+  cookie: { secure: false },
   store: sessionStore,
 }));
 
