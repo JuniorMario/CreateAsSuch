@@ -7,8 +7,6 @@ module.exports = {
       ],
       watch: [
         ".",
-        "ecosystem.config.js",
-        "package.json"
       ],
       ignore_watch: [
         "node_modules",
