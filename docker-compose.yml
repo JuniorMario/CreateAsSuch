@@ -19,6 +19,7 @@ services:
       - redis
   database:
     container_name: database
+
     image: mysql:5.7
     environment:
       - MYSQL_USERNAME=root
