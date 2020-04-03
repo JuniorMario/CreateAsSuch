@@ -29,10 +29,22 @@ If the build run successfully, use the `docker attach` command to debug the prog
 ```
 $ docker attach app
 ```
+
+If you're running the container for the first time it's recommended that you wait the migrations to be finished before refreshing the page, if it doesn't work at the first time just make and save any change in any file and let it run again automatically.
+
+
+## Accessing the application
+
+Now that you have your application all set up you can access it in your localhost in the port 3000.
+```
+http://localhost:3000/home 
+```
 ## Setting up manually
 
 if you don't want/can't use the automated python script to setup the permissions do it manually using the following commands:
 ```
+$ mkdir docker
+$ mkdir docker/database
 $ sudo chmod 777 docker/database
 $ sudo chown -R ${USER}:${USER} docker/database
 ```
