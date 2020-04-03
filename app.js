@@ -15,20 +15,27 @@ var adminRouter = require('./routes/admin');
 
 const { exec } = require('child_process');
 
+
 console.log('Running migrations... %s', path.join(__dirname, './'))
 
-exec('npx sequelize-cli db:migrate', {
+exec('npm run migrate', {
   env: process.env,
   cwd: path.join(__dirname, './'),
 }, (err, stdout, stderr) => {
   if (err) {
-    console.info('Migrations failed to run:')
+    setTimeout(() => {
+      console.info('Migrations failed to run...we are trying again...')
+      exec('npm run migrate', {
+        env: process.env,
+        cwd: path.join(__dirname, './'),
+      })
+    }, 3000);
+    
     console.error(err)
   } else {
     console.log('Migrations runned successfully')
   }
 })
-
 var app = express();
 
 

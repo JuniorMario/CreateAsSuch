@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "migrate": "npx sequelize-cli db:migrate  --migrations-path ./migrations",
+    "migration": "npx sequelize-cli migration:generate  --migrations-path ./migrations",
     "test": "mocha tests/*.test.js",
     "start": "node ./bin/www"
   },
