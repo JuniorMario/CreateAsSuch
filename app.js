@@ -1,4 +1,3 @@
-var createError = require('http-errors');
 var config = require('./config.json')
 const express = require('express');
 const path = require('path');
@@ -65,10 +64,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/admin-panel', adminRouter);
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+
 
 // error handler
 app.use(function (err, req, res, next) {
