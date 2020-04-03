@@ -1,4 +1,4 @@
 
 *.rdb
 **/node_modules
-
+**/docker

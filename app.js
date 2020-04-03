@@ -27,6 +27,10 @@ exec('npm run migrate', {
       exec('npm run migrate', {
         env: process.env,
         cwd: path.join(__dirname, './'),
+      }, (err) => {
+        if (err) {
+          console.log("We still can't run the migrations, please try restart the application.")
+        }
       })
     }, 3000);
     
