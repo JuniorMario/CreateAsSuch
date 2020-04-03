@@ -30,7 +30,7 @@ If the build run successfully, use the `docker attach` command to debug the prog
 $ docker attach app
 ```
 
-If you're running the container for the first time it's recommended that you wait the migrations to be finished before refreshing the page, if it doesn't work at the first time run `docker restart app` .
+If you're running the container for the first time it's recommended that you wait the migrations to be finished before refreshing the page, if it doesn't work at the first time run `docker restart app` or update any file of the server.
 
 
 
