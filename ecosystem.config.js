@@ -1,12 +1,13 @@
 module.exports = {
     apps: [{
       name: 'Create as Such',
-      script: './bin/www',
+      script: './server/bin/www',
       args: [
         '--color',
       ],
-      watch: [
+      watch: [ 
         ".",
+        "server",
       ],
       ignore_watch: [
         "docker",

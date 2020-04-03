@@ -5,11 +5,12 @@ services:
     container_name: app
     volumes: 
       - ./:/app
-    ports:
+      - /app/node_modules
+    ports: 
       - "3000:3000"
     build:
       context: .
-    links:
+    links: 
       - redis
       - database
     environment:
@@ -23,6 +24,7 @@ services:
       - ./docker/database:/var/lib/mysql
     image: mysql:5.7
     environment:
+      - MYSQL_ROOT_HOST=%
       - MYSQL_USERNAME=root
       - MYSQL_PASSWORD=root
       - MYSQL_ROOT_PASSWORD=

@@ -1,4 +1,4 @@
-var config = require('./config.json')
+//var config = require('./config.json')
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -17,12 +17,12 @@ const { exec } = require('child_process');
 
 console.log('Running migrations... %s', path.join(__dirname, './'))
 
-exec('npm run migrate', {
+exec('npx sequelize-cli db:migrate', {
   env: process.env,
   cwd: path.join(__dirname, './'),
 }, (err, stdout, stderr) => {
   if (err) {
-    setTimeout(() => {
+    setTimeout(() => { 
       console.info('Migrations failed to run...we are trying again...')
       exec('npm run migrate', {
         env: process.env,
@@ -31,16 +31,15 @@ exec('npm run migrate', {
         if (err) {
           console.log("We still can't run the migrations, please try restart the application.")
         }
-      })
-    }, 3000);
-    
+      }) 
+    }, 3000);  
     console.error(err)
   } else {
     console.log('Migrations runned successfully')
   }
 })
 var app = express();
-
+console.log("pls     ")
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
