@@ -1,23 +1,33 @@
 const DB = require('../db/model')
+const Knex = require('knex')({
+    client: 'pg',
+    connection: {
+      host : 'database',
+      user : 'root',
+      password : 'root',
+      database : 'blog',
+ 
+    }
+  });
 
 class AdminHandlerDB {
     constructor() {
-        this._handler = DB.Posts
+        this._handler = Knex('POSTS')
     }
 
     async read(item = {}) {
-        return await this._handler.findAll({ where: item, raw: true })
+        return await this._handler.select(item).where(item, '=', item)
     }
 
+    async readAll() {
+        return await this._handler.select('*')
+    }
     async readByTitle(title) {
-        return await this._handler.findAndCountAll({where: {title}})
+        return await this._handler.select('title')
     }
 
     async post(title, subtitle = null, content) {
-        const {
-            dataValues
-        } = await this._handler.create(title, subtitle, content)
-        return dataValues
+        await this._handler.insert({title, subtitle, content})
     }
 
     async update(id, item) {

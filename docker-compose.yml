@@ -20,16 +20,13 @@ services:
       - redis
   database:
     container_name: database
-    volumes:
-      - ./docker/database:/var/lib/mysql
-    image: mysql:5.7
+    image: postgres
     environment:
-      - MYSQL_ROOT_HOST=%
+      - POSTGRES_USER=root
       - MYSQL_USERNAME=root
-      - MYSQL_PASSWORD=root
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_DATABASE=blogapp
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=blog
+
   redis:
     container_name: cache
     image: redis

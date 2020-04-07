@@ -16,7 +16,7 @@ exports.deletePost = async(id) => {
     return {response, message: "Success"}
 }
 exports.getPosts = async () => {
-    const response = await Adminer.read()
+    const response = await Adminer.readAll()
     return {response: response, message: "Success"}
 }
 

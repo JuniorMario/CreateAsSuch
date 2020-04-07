@@ -17,7 +17,7 @@ const { exec } = require('child_process');
 
 console.log('Running migrations... %s', path.join(__dirname, './'))
 
-exec('npx sequelize-cli db:migrate', {
+exec('npm run migrate && npm run seed', {
   env: process.env,
   cwd: path.join(__dirname, './'),
 }, (err, stdout, stderr) => {
@@ -39,7 +39,7 @@ exec('npx sequelize-cli db:migrate', {
   }
 })
 var app = express();
-console.log("pls     ")
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
